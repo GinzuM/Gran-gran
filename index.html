@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GranGran</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="profile-view">
+            <div class="header-nav">
+                <span class="username-top" id="top-username">...</span>
+                <span class="menu-dots" onclick="abrirInfo()">•••</span>
+            </div>
+
+            <div class="profile-section">
+                <div class="profile-top">
+                    <div class="avatar-container" onclick="abrirZoomPerfil()">
+                        <img id="profile-img" src="" alt="Perfil">
+                    </div>
+                    <div class="stats-container">
+                        <div class="stat-box"><span class="stat-num" id="posts-count">0</span><span class="stat-label">posts</span></div>
+                        <div class="stat-box"><span class="stat-num" id="followers-count">0</span><span class="stat-label">followers</span></div>
+                        <div class="stat-box"><span class="stat-num" id="following-count">0</span><span class="stat-label">following</span></div>
+                    </div>
+                </div>
+
+                <div class="bio-section">
+                    <div class="bio-name" id="bio-name"></div>
+                    <div class="bio-text" id="bio-text"></div>
+                    <a href="#" class="bio-link" id="bio-link"></a>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="btn-follow" onclick="seguir()">Follow</button>
+                <button onclick="abrirOffline()">Message</button>
+            </div>
+
+            <div class="highlights" id="highlights-container"></div>
+
+            <div class="grid-tabs">
+                <div class="tab active" onclick="mudarAba('todos', this)">▦</div>
+                <div class="tab" onclick="mudarAba('videos', this)">🎬</div>
+                <div class="tab" onclick="abrirOffline()">🏷️</div>
+            </div>
+
+            <div id="grid-container" class="grid-layout"></div>
+        </div>
+
+        <div id="feed-view" class="hidden">
+            <div class="feed-header">
+                <div class="back-btn" onclick="voltarPerfil()">❮</div>
+                <div class="feed-title">Posts</div>
+            </div>
+            <div id="feed-container"></div>
+        </div>
+
+        <div id="offline-view" class="hidden" onclick="fecharOffline()">
+            <div class="glitch-text">NO SIGNAL</div>
+            <div class="sub-glitch">System Failure...<br>Click to return.</div>
+        </div>
+
+        <div id="profile-zoom-view" class="hidden" onclick="fecharZoomPerfil()">
+            <img id="zoomed-img" src="">
+        </div>
+
+        <div id="story-view" class="hidden">
+            <div class="story-progress-bar" id="story-bars"></div>
+
+            <div class="story-header">
+                <img id="story-avatar" src="">
+                <span id="story-username">yureiradio</span>
+                <span class="close-story" onclick="fecharStory()">✕</span>
+            </div>
+
+            <div id="story-media-container"></div>
+
+            <div class="story-tap left" onclick="slideAnteriorStory()"></div>
+            <div class="story-tap right" onclick="proximoSlideStory()"></div>
+        </div>
+
+        <div id="info-view" class="hidden">
+            <div class="feed-header">
+                <div class="back-btn" onclick="fecharInfo()">✕</div>
+                <div class="feed-title">System Info</div>
+            </div>
+            <div class="readme-content" id="readme-display"></div>
+        </div>
+
+    </div>
+
+    <script src="js/dados.js"></script>
+    <script src="js/readme.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
