@@ -7,19 +7,19 @@ const configuracao = {
         link: "yurei.radio/listen",
         fotoPerfil: "perfil.png",
         seguidores: 665,
-        seguindo: 0
+        seguindo: 10
     },
 
     // Quantidade total de fotos no Feed
-    totalFotos: 13, 
+    totalFotos: 14, 
 
     // === DESTAQUES (STORIES) ===
     // ATENÇÃO: A capa será AUTOMATICAMENTE a primeira foto da lista.
     destaques: [
         {
-            id: "shows",
-            titulo: "Shows",
-            fotos: ["13.png"]
+            id: "New",
+            titulo: "New Songs",
+            fotos: ["STATIC - YureiRADIO.png"]
         },
     ],
 
@@ -34,10 +34,10 @@ const configuracao = {
         },
         // Adicione outros posts aqui conforme necessário
         {
-            id: 13,
+            id: 14,
             tipo: "foto",
             legenda: "New aesthetic.",
-            likes: 1300,
+            likes: 100,
             data: "HOJE"
         }
     ],
