@@ -14,7 +14,8 @@ a { text-decoration: none; color: inherit; }
 .hidden { display: none !important; }
 
 /* LAYOUT BASE */
-.container { max-width: 470px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 50px; overflow-x: hidden; }
+/* Removi o overflow-x daqui para evitar bugs de scroll */
+.container { max-width: 470px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 50px; }
 
 /* HEADER & PERFIL */
 .header-nav { height: 44px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; border-bottom: 1px solid var(--border-color); }
@@ -54,7 +55,30 @@ a { text-decoration: none; color: inherit; }
 .grid-item img, .grid-item video { width: 100%; height: 100%; object-fit: cover; }
 .type-icon { position: absolute; top: 5px; right: 5px; color: #fff; text-shadow: 0 0 3px rgba(0,0,0,0.8); font-size: 14px; }
 
-.feed-header { height: 44px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; padding: 0 16px; position: sticky; top: 0; background: var(--bg-color); z-index: 50; }
+/* --- AQUI ESTÁ A CORREÇÃO DO HEADER FIXO --- */
+.feed-header { 
+    height: 44px; 
+    border-bottom: 1px solid var(--border-color); 
+    display: flex; 
+    align-items: center; 
+    padding: 0 16px; 
+    background: var(--bg-color); 
+    z-index: 50; 
+
+    /* Fixação Robusta */
+    position: fixed; 
+    top: 0; 
+    width: 100%;
+    max-width: 470px; /* Mantém largura correta no PC */
+    left: 50%; 
+    transform: translateX(-50%); /* Centraliza na tela */
+}
+
+/* Empurra o conteúdo para baixo para não ficar escondido atrás do header */
+#feed-container {
+    padding-top: 44px; 
+}
+
 .back-btn { font-size: 24px; cursor: pointer; margin-right: 15px; }
 .feed-title { font-weight: bold; font-size: 16px; }
 
@@ -100,82 +124,19 @@ a { text-decoration: none; color: inherit; }
 #info-view { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 90; overflow-y: auto; }
 .readme-content { padding: 20px; font-family: monospace; font-size: 12px; color: #00ff00; line-height: 1.6; white-space: pre-wrap; }
 
-/* MANTENHA TODO O INÍCIO DO ARQUIVO IGUAL... */
-/* ... SÓ SUBSTITUA DO "STORIES VIEWER" PARA BAIXO POR ISSO: */
-
-/* STORIES VIEWER (AJUSTADO) */
-#story-view { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: #000; 
-    z-index: 999; 
-    display: flex; 
-    flex-direction: column; 
-}
-
-/* Container de Mídia */
-#story-media-container { 
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background: #000; 
-    z-index: 1; 
-}
-
-#story-media-container img, #story-media-container video { 
-    width: auto;
-    height: auto;
-    max-width: 100%; 
-    max-height: 85vh; 
-    object-fit: contain; 
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-/* Cabeçalho */
-.story-header { 
-    padding: 15px; 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    z-index: 20; 
-    position: absolute; 
-    top: 20px; /* Desci um pouco para não colar na barra */
-    width: 100%; 
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
-}
+/* STORIES VIEWER (AJUSTADO E FINO) */
+#story-view { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999; display: flex; flex-direction: column; }
+#story-media-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; z-index: 1; }
+#story-media-container img, #story-media-container video { width: auto; height: auto; max-width: 100%; max-height: 85vh; object-fit: contain; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+.story-header { padding: 15px; display: flex; align-items: center; gap: 10px; z-index: 20; position: absolute; top: 20px; width: 100%; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
 .story-header img { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.5); background: #000; }
 .story-header span { font-weight: bold; font-size: 14px; color: white; }
 .close-story { margin-left: auto; font-size: 24px; cursor: pointer; color: white; padding: 5px; }
 
-/* Barras de Progresso (AGORA MAIS FINAS) */
-.story-progress-bar { 
-    display: flex; 
-    gap: 4px; 
-    padding: 10px 8px; /* Espaçamento externo */
-    position: absolute; 
-    top: 0; 
-    width: 100%; 
-    z-index: 25; 
-}
-.bar-bg { 
-    height: 2px; /* Altura da linha (bem fina) */
-    flex: 1; 
-    background: rgba(255,255,255,0.3); 
-    border-radius: 2px; 
-    overflow: hidden; 
-    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
+/* BARRAS DE PROGRESSO FINAS */
+.story-progress-bar { display: flex; gap: 4px; padding: 10px 8px; position: absolute; top: 0; width: 100%; z-index: 25; }
+.bar-bg { height: 2px; flex: 1; background: rgba(255,255,255,0.3); border-radius: 2px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 .bar-fill { height: 100%; background: #fff; width: 0%; }
 
-/* Áreas de Toque */
 .story-tap { position: absolute; top: 0; bottom: 0; width: 30%; z-index: 15; }
-.story-tap.left { left: 0; } 
-.story-tap.right { right: 0; }
+.story-tap.left { left: 0; } .story-tap.right { right: 0; }
