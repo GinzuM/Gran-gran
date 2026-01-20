@@ -19,7 +19,7 @@ const configuracao = {
         {
             id: "shows",
             titulo: "Shows",
-            fotos: ["destaque_show_1.png"]
+            fotos: ["13.png"]
         },
     ],
 
